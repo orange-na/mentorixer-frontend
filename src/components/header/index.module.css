@@ -1,0 +1,13 @@
+.header {
+  padding: 28px 40px;
+  /* background-color: #0a0a0a; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+}
