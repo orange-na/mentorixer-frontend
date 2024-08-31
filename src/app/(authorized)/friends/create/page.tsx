@@ -1,9 +1,8 @@
 "use client";
 
-import axios from "axios";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
-import { getCookie } from "@/utils/cookie";
+import { axiosInstance } from "@/utils/axios";
 
 export default function CreateFriend() {
   const router = useRouter();
@@ -12,14 +11,9 @@ export default function CreateFriend() {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     try {
-      await axios.post(
+      await axiosInstance.post(
         "http://localhost:8080/friends",
-        Object.fromEntries(formData),
-        {
-          headers: {
-            Authorization: getCookie("token") || "",
-          },
-        }
+        Object.fromEntries(formData)
       );
       router.push("/home");
     } catch (error) {

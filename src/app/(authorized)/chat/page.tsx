@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
-import axios from "axios";
-import { getCookie } from "@/utils/cookie";
 import Link from "next/link";
+import { axiosInstance } from "@/utils/axios";
 
 type Friend = {
   ID: number;
@@ -33,16 +32,9 @@ export default function ChatPage() {
 
   const gedFriends = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8080/users/me/friends",
-        {
-          headers: {
-            Authorization: getCookie("token") || "",
-          },
-        }
-      );
+      const response = await axiosInstance.get("/users/me/friends");
       const data = await response.data;
-      console.log(data);
+      // console.log(data);
       setFriends(data);
     } catch (error) {
       console.log(error);
@@ -52,6 +44,8 @@ export default function ChatPage() {
   useEffect(() => {
     gedFriends();
   }, []);
+
+  console.log(process.env.NODE_ENV);
 
   return (
     <div className={styles.chatPage}>
@@ -63,9 +57,9 @@ export default function ChatPage() {
         <aside className={styles.friendList}>
           <h2>Friends</h2>
           <ul>
-            {friends.map((friend) => (
+            {friends.map((friend, index) => (
               <li
-                key={friend.ID}
+                key={index}
                 onClick={() => handleFriendClick(friend)}
                 className={
                   selectedFriend?.ID === friend.ID ? styles.selected : ""
