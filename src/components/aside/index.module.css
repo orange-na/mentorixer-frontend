@@ -1,12 +1,9 @@
-.chatPage {
-  display: flex;
-  height: 100vh;
-}
-
 .sidebar {
-  width: 300px;
+  display: flex;
+  flex-direction: column;
   background-color: #f0f0f0;
   padding: 20px;
+  height: 100%;
 }
 
 .profile {
@@ -29,8 +26,6 @@
 }
 
 .friendList li {
-  display: flex;
-  align-items: center;
   padding: 10px;
   cursor: pointer;
 }
@@ -39,63 +34,12 @@
   background-color: #e0e0e0;
 }
 
-.settings {
-  margin-top: 20px;
-}
-
-.settings div {
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
-.chatArea {
-  flex: 1;
-  padding: 20px;
-}
-
-.projectDetails {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.projectDetails div {
-  display: flex;
-  flex-direction: column;
-}
-
-.chatHistory {
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 20px;
-}
-
-.messageList {
-  list-style-type: none;
-  padding: 0;
-}
-
-.messageList li {
-  margin-bottom: 10px;
-}
-
-.chatInput {
-  display: flex;
-}
-
-.chatInput input {
-  flex: 1;
+.createFriendButton {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.chatInput button {
-  padding: 10px 20px;
   background-color: #007bff;
-  color: #fff;
+  color: white;
   border: none;
-  border-radius: 4px;
-  margin-left: 10px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.2s;
 }

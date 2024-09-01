@@ -3,7 +3,7 @@
 import axios from "axios";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
-import { setCookie } from "@/utils/cookie";
+import { setCookie } from "@/utils/cookie/cookie-client";
 
 export default function SignIn() {
   const router = useRouter();

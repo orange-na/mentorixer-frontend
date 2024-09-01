@@ -1,8 +1,8 @@
 "use client";
 
+import { axiosClient } from "@/utils/axios/axios-client";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
-import { axiosInstance } from "@/utils/axios";
 
 export default function CreateFriend() {
   const router = useRouter();
@@ -11,11 +11,11 @@ export default function CreateFriend() {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     try {
-      await axiosInstance.post(
+      await axiosClient.post(
         "http://localhost:8080/friends",
         Object.fromEntries(formData)
       );
-      router.push("/home");
+      router.push("/friends/1");
     } catch (error) {
       console.error(error);
     }

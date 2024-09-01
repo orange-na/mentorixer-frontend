@@ -1,6 +1,7 @@
 .chatPage {
   display: flex;
   height: 100vh;
+  position: relative;
 }
 
 .sidebar {
@@ -81,6 +82,12 @@
 
 .chatInput {
   display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background-color: #fff;
 }
 
 .chatInput input {

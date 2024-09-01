@@ -5,7 +5,7 @@ export function setCookie(name: string, value: string, days: number) {
   document.cookie = name + "=" + value + expires + "; path=/";
 }
 
-export function getCookie(name: string) {
+export function getClientCookie(name: string) {
   const cookieName = name + "=";
   const cookies = document.cookie.split(";");
   for (let cookie of cookies) {

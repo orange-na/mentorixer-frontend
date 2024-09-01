@@ -36,7 +36,7 @@ export interface Room {
 export interface Message {
   id: number;
   roomId: number;
-  room: Room;
+  room?: Room;
   userId?: number;
   user?: User;
   friendId?: number;

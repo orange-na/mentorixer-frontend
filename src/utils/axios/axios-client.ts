@@ -1,13 +1,15 @@
 import Axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
-import { getCookie } from "./cookie";
+import { getClientCookie } from "../cookie/cookie-client";
 
-export const axiosInstance = Axios.create({
+const TIME_OUT = 10000;
+
+export const axiosClient = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
-  timeout: 10000,
+  timeout: TIME_OUT,
 });
 
 const requestHandler = (request: InternalAxiosRequestConfig) => {
-  const token = getCookie("token");
+  const token = getClientCookie("token");
   if (token) {
     request.headers["Authorization"] = `Bearer ${token}`;
   }
@@ -18,5 +20,5 @@ const responseHandler = (response: AxiosResponse) => {
   return response;
 };
 
-axiosInstance.interceptors.request.use(requestHandler);
-axiosInstance.interceptors.response.use(responseHandler);
+axiosClient.interceptors.request.use(requestHandler);
+axiosClient.interceptors.response.use(responseHandler);

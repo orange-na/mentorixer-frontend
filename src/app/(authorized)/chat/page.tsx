@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Link from "next/link";
-import { axiosInstance } from "@/utils/axios";
+import { axiosClient } from "@/utils/axios/axios-client";
 
 type Friend = {
   ID: number;
@@ -32,7 +32,7 @@ export default function ChatPage() {
 
   const gedFriends = async () => {
     try {
-      const response = await axiosInstance.get("/users/me/friends");
+      const response = await axiosClient.get("/users/me/friends");
       const data = await response.data;
       // console.log(data);
       setFriends(data);

@@ -1,93 +1,109 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import MessageContent from "./_components/messageContent";
 import styles from "./page.module.css";
-import axios from "axios";
-import { getCookie } from "@/utils/cookie";
-import Link from "next/link";
 
-type Friend = {
-  ID: number;
-  Name: string;
-};
+import { Message } from "@/types";
+import { isAuthenticated } from "@/utils/authentication";
+import { redirect } from "next/navigation";
 
-type Message = {
-  id: number;
-  friendId: number;
-  content: string;
-};
-
-const messages: Message[] = [
-  { id: 1, friendId: 1, content: "Hey, did you see the new proposal?" },
-  { id: 2, friendId: 1, content: "Yes, I reviewed it and have some feedback." },
+export const mockMessages: Message[] = [
+  {
+    id: 1,
+    roomId: 1,
+    userId: 1,
+    content: "Hello, how are you?",
+    createdAt: new Date("2023-06-01T10:00:00"),
+    updatedAt: new Date("2023-06-01T10:00:00"),
+  },
+  {
+    id: 2,
+    roomId: 1,
+    friendId: 2,
+    content: "I'm doing well, thanks for asking!",
+    createdAt: new Date("2023-06-01T10:05:00"),
+    updatedAt: new Date("2023-06-01T10:05:00"),
+  },
   {
     id: 3,
+    roomId: 1,
+    userId: 1,
+    content: "That's great to hear. How was your weekend?",
+    createdAt: new Date("2023-06-01T10:10:00"),
+    updatedAt: new Date("2023-06-01T10:10:00"),
+  },
+  {
+    id: 4,
+    roomId: 1,
     friendId: 2,
-    content: "Great, let's discuss the feedback in our next meeting.",
+    content: "It was nice and relaxing. I went on a hike with some friends.",
+    createdAt: new Date("2023-06-01T10:15:00"),
+    updatedAt: new Date("2023-06-01T10:15:00"),
+  },
+  {
+    id: 5,
+    roomId: 1,
+    userId: 1,
+    content: "That sounds like a lot of fun! I love hiking.",
+    createdAt: new Date("2023-06-01T10:20:00"),
+    updatedAt: new Date("2023-06-01T10:20:00"),
+  },
+  {
+    id: 6,
+    roomId: 1,
+    friendId: 2,
+    content: "Yeah, it's a great way to get some exercise and enjoy nature.",
+    createdAt: new Date("2023-06-01T10:25:00"),
+    updatedAt: new Date("2023-06-01T10:25:00"),
+  },
+  {
+    id: 7,
+    roomId: 1,
+    userId: 1,
+    content: "Definitely! We should go on a hike together sometime.",
+    createdAt: new Date("2023-06-01T10:30:00"),
+    updatedAt: new Date("2023-06-01T10:30:00"),
+  },
+  {
+    id: 8,
+    roomId: 1,
+    friendId: 2,
+    content: "That would be awesome! Let's plan something soon.",
+    createdAt: new Date("2023-06-01T10:35:00"),
+    updatedAt: new Date("2023-06-01T10:35:00"),
+  },
+  {
+    id: 9,
+    roomId: 1,
+    userId: 1,
+    content: "Sounds good. I'll check my schedule and get back to you.",
+    createdAt: new Date("2023-06-01T10:40:00"),
+    updatedAt: new Date("2023-06-01T10:40:00"),
+  },
+  {
+    id: 10,
+    roomId: 1,
+    friendId: 2,
+    content: "Perfect! Looking forward to it.",
+    createdAt: new Date("2023-06-01T10:45:00"),
+    updatedAt: new Date("2023-06-01T10:45:00"),
   },
 ];
 
-export default function ChatPage() {
-  const [selectedFriend, setSelectedFriend] = useState<Friend | null>(null);
-  const [friends, setFriends] = useState<Friend[]>([
-    { ID: 1, Name: "Jane Smith" },
-    { ID: 2, Name: "Michael Johnson" },
-    { ID: 3, Name: "Sarah Lee" },
-  ]);
+export default async function ChatPage() {
+  const authenticated = await isAuthenticated();
 
-  const handleFriendClick = (friend: Friend) => {
-    setSelectedFriend(friend);
-  };
+  if (!authenticated) {
+    redirect("/sign-in");
+  }
+
+  // try {
+  //   const res = await axiosInstance.get("/messages");
+  // } catch (error) {
+  //   console.error(error);
+  // }
 
   return (
     <div className={styles.chatPage}>
-      <aside className={styles.sidebar}>
-        <div className={styles.profile}>
-          <div className={styles.status}></div>
-          <span>John Doe</span>
-        </div>
-        <ul className={styles.friendList}>
-          {friends.map((friend, index) => (
-            <li
-              key={index}
-              onClick={() => handleFriendClick(friend)}
-              className={
-                selectedFriend?.ID === friend.ID ? styles.selected : ""
-              }
-            >
-              <div className={styles.status}></div>
-              {friend.Name}
-            </li>
-          ))}
-        </ul>
-        <div className={styles.settings}>
-          <div className={styles.accountSettings}>Account Settings</div>
-          <div className={styles.notifications}>Notifications</div>
-          <div className={styles.support}>Help & Support</div>
-        </div>
-      </aside>
-      <main className={styles.chatArea}>
-        <div className={styles.projectDetails}></div>
-
-        <div className={styles.chatHistory}>
-          {selectedFriend && (
-            <>
-              <h2>Chat with {selectedFriend.Name}</h2>
-              {/* <ul className={styles.messageList}>
-                {messages
-                  .filter((message) => message.friendId === selectedFriend.ID)
-                  .map((message) => (
-                    <li key={message.id}>{message.content}</li>
-                  ))}
-              </ul> */}
-            </>
-          )}
-        </div>
-        <div className={styles.chatInput}>
-          <input type="text" placeholder="Type your message..." />
-          <button>Send</button>
-        </div>
-      </main>
+      <MessageContent messages={mockMessages} />
     </div>
   );
 }

@@ -6,33 +6,31 @@ import { Friend } from "@/types";
 
 export type AuthorizedAsideProps = {
   friends: Friend[];
-  selectedFriend?: Friend;
+  selectedFriendId?: string;
 };
 
 export default function AuthorizedAside(props: AuthorizedAsideProps) {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.profile}>
-        <div className={styles.status}></div>
-        <span>Create Friend</span>
+        <Link href="/friends/create" className={styles.createFriendButton}>
+          Create Friend
+        </Link>
       </div>
       <ul className={styles.friendList}>
         {props.friends.map((friend) => (
           <li
             key={friend.id}
             className={
-              props.selectedFriend?.id === friend.id ? styles.selected : ""
+              props.selectedFriendId === friend.id.toString()
+                ? styles.selected
+                : ""
             }
           >
-            {friend.name}
+            <Link href={`/friends/${friend.id}`}> {friend.name}</Link>
           </li>
         ))}
       </ul>
-      {/* <div className={styles.settings}>
-        <div className={styles.accountSettings}>Account Settings</div>
-        <div className={styles.notifications}>Notifications</div>
-        <div className={styles.support}>Help & Support</div>
-      </div> */}
     </aside>
   );
 }
