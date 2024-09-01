@@ -1,14 +1,10 @@
-import { cookies } from "next/headers";
-import axios from "axios";
+"use server";
+
+import { axiosServer } from "./axios/axios-server";
 
 export async function isAuthenticated(): Promise<boolean> {
   try {
-    const token = cookies().get("token")?.value;
-    const response = await axios.get("http://localhost:8080/users/me", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await axiosServer.get("/users/me");
 
     return response.status === 200;
   } catch (error) {

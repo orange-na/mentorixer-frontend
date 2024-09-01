@@ -31,8 +31,6 @@ export default function AuthorizedLayout({
     getFriends();
   }, []);
 
-  console.log(params.friendId);
-
   return (
     <div className={styles.container}>
       <div className={styles.aside}>

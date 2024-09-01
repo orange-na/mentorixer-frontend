@@ -10,8 +10,8 @@ export const axiosServer = Axios.create({
   timeout: TIME_OUT,
 });
 
-const requestHandler = (request: InternalAxiosRequestConfig) => {
-  const token = getServerCookie("token");
+const requestHandler = async (request: InternalAxiosRequestConfig) => {
+  const token = await getServerCookie("token");
   if (token) {
     request.headers["Authorization"] = `Bearer ${token}`;
   }
