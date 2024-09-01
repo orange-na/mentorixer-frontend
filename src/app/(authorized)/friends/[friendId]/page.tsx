@@ -3,7 +3,9 @@ import styles from "./page.module.css";
 
 import { Message } from "@/types";
 import { isAuthenticated } from "@/utils/authentication";
+import { axiosServer } from "@/utils/axios/axios-server";
 import { redirect } from "next/navigation";
+import ChatInput from "./_components/sendInput";
 
 export const mockMessages: Message[] = [
   {
@@ -88,22 +90,28 @@ export const mockMessages: Message[] = [
   },
 ];
 
-export default async function ChatPage() {
-  const authenticated = await isAuthenticated();
+export default async function ChatPage({
+  params,
+}: {
+  params: { friendId: string };
+}) {
+  let messages: Message[] = [];
+  try {
+    const authenticated = await isAuthenticated();
+    if (!authenticated) {
+      redirect("/sign-in");
+    }
 
-  if (!authenticated) {
-    redirect("/sign-in");
+    const res = await axiosServer.get(`friends/${params.friendId}/messages`);
+    messages = res.data;
+  } catch (error) {
+    console.error(error);
   }
-
-  // try {
-  //   const res = await axiosInstance.get("/messages");
-  // } catch (error) {
-  //   console.error(error);
-  // }
 
   return (
     <div className={styles.chatPage}>
-      <MessageContent messages={mockMessages} />
+      <MessageContent messages={messages} />
+      <ChatInput friendId={params.friendId} />
     </div>
   );
 }

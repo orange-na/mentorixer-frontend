@@ -11,10 +11,7 @@ export default function CreateFriend() {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     try {
-      await axiosClient.post(
-        "http://localhost:8080/friends",
-        Object.fromEntries(formData)
-      );
+      await axiosClient.post("/friends", Object.fromEntries(formData));
       router.push("/friends/1");
     } catch (error) {
       console.error(error);
