@@ -17,7 +17,7 @@ export default function ChatInput(props: ChatInputProps) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     try {
-      await axiosClient.post(
+      const res = await axiosClient.post(
         `/friends/${props.friendId}/messages`,
         Object.fromEntries(formData)
       );
@@ -25,6 +25,10 @@ export default function ChatInput(props: ChatInputProps) {
         inputRef.current.value = "";
       }
       router.refresh();
+
+      //   await axiosClient.post(`/api/gimini`, {
+      //     content: res.data.content,
+      //   });
     } catch (error) {
       console.error(error);
     }
