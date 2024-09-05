@@ -17,7 +17,7 @@ export default function ChatInput(props: ChatInputProps) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     try {
-      const res = await axiosClient.post(
+      await axiosClient.post(
         `/friends/${props.friendId}/messages`,
         Object.fromEntries(formData)
       );
