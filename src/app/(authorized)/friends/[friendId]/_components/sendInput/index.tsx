@@ -10,14 +10,14 @@ type ChatInputProps = {
 };
 
 export default function ChatInput(props: ChatInputProps) {
-  const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     try {
-      await axiosClient.post(
+      const res = await axiosClient.post(
         `/friends/${props.friendId}/messages`,
         Object.fromEntries(formData)
       );
@@ -26,9 +26,10 @@ export default function ChatInput(props: ChatInputProps) {
       }
       router.refresh();
 
-      //   await axiosClient.post(`/api/gimini`, {
-      //     content: res.data.content,
-      //   });
+      await axiosClient.post(`/friends/${props.friendId}/api/gimini`, {
+        content: res.data.content,
+      });
+      router.refresh();
     } catch (error) {
       console.error(error);
     }
@@ -42,6 +43,7 @@ export default function ChatInput(props: ChatInputProps) {
         placeholder="Type your message..."
         ref={inputRef}
       />
+
       <button>Send</button>
     </form>
   );

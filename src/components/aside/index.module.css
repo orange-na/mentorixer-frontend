@@ -27,19 +27,32 @@
 
 .friendList li {
   padding: 10px;
+  margin: 5px 0;
   cursor: pointer;
 }
 
 .friendList li.selected {
   background-color: #e0e0e0;
+  border-radius: 8px;
+}
+
+.friendList li:hover {
+  background-color: #e0e0e06d;
+  border-radius: 8px;
 }
 
 .createFriendButton {
   padding: 10px;
-  background-color: #007bff;
+  text-align: center;
+  background-color: #127ff4;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  width: 100%;
   cursor: pointer;
   transition: background-color 0.2s;
+}
+
+.createFriendButton:hover {
+  background-color: #2f93ff;
 }
