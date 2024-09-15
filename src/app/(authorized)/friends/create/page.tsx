@@ -2,17 +2,14 @@
 
 import { axiosClient } from "@/utils/axios/axios-client";
 import styles from "./page.module.css";
-import { useRouter } from "next/navigation";
 
 export default function CreateFriend() {
-  const router = useRouter();
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     try {
       await axiosClient.post("/friends", Object.fromEntries(formData));
-      router.push("/friends/1");
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
