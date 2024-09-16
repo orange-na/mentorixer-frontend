@@ -1,7 +1,7 @@
 import MessageContent from "./_components/messageContent";
 import styles from "./page.module.css";
 
-import { Friend, Message } from "@/types";
+import { Message } from "@/types";
 import { isAuthenticated } from "@/utils/authentication";
 import { axiosServer } from "@/utils/axios/axios-server";
 import { redirect } from "next/navigation";
