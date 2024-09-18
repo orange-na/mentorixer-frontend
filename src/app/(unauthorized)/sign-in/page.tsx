@@ -17,7 +17,7 @@ export default function SignIn() {
       );
       const token = res.data.token;
       setCookie("token", token, 10);
-      router.push("/chat");
+      router.push("/friends");
     } catch (error) {
       console.error(error);
     }

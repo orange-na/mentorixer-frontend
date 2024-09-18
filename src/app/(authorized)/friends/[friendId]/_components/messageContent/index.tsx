@@ -17,7 +17,6 @@ export default function MessageContent({
           名前：{friend.name} MBTI：{friend.mbti} 年齢：{friend.age}歳 特徴：
           {friend.description}
         </div>
-        <button>編集</button>
       </div>
 
       <div className={styles.messageContent}>
