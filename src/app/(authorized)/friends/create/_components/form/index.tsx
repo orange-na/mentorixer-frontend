@@ -14,7 +14,7 @@ export default function CreateFriendForm() {
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: createFriendSchema });
     },
-    shouldValidate: "onBlur",
+    shouldValidate: "onSubmit",
     shouldRevalidate: "onInput",
     onSubmit(event, { formData }) {
       event.preventDefault();
