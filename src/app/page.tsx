@@ -1,16 +1,16 @@
-import Link from "next/link";
 import styles from "./page.module.css";
+import LinkButton from "@/components/linkButton";
 
 export default function Home() {
   return (
     <div className={styles.container}>
       <div className={styles.buttonContainer}>
-        <Link href="sign-in" className={styles.button}>
-          Sign In
-        </Link>
-        <Link href="/sign-up" className={styles.button}>
-          Sign Up
-        </Link>
+        <LinkButton href="/sign-up" variant="primary">
+          新規登録
+        </LinkButton>
+        <LinkButton href="/sign-in" variant="primary">
+          ログイン
+        </LinkButton>
       </div>
     </div>
   );

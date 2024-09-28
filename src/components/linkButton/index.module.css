@@ -1,0 +1,33 @@
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 300px;
+  height: 50px;
+  margin: 0 auto;
+}
+
+.primary {
+  background-color: #efefef;
+  color: #000000;
+}
+
+.secondary {
+  background-color: #6c757d;
+}
+
+.tertiary {
+  background-color: #6c757d;
+}
+
+.button:disabled {
+  background-color: #6c757d;
+  color: gray;
+  cursor: not-allowed;
+}
