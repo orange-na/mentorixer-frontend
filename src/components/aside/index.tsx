@@ -14,6 +14,7 @@ import { axiosClient } from "@/utils/axios/axios-client";
 export type AuthorizedAsideProps = {
   friends: Friend[];
   selectedFriendId?: string;
+  closeAside: () => void;
 };
 
 export default function AuthorizedAside(props: AuthorizedAsideProps) {
@@ -31,7 +32,7 @@ export default function AuthorizedAside(props: AuthorizedAsideProps) {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.top}>
-        <div className={styles.icon}>
+        <div className={styles.icon} onClick={props.closeAside}>
           <TbLayoutSidebarRightExpand size={20} />
         </div>
         <Link href="/friends/create" className={styles.icon}>

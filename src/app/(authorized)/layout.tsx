@@ -6,6 +6,7 @@ import { Friend } from "@/types";
 import AuthorizedAside from "@/components/aside";
 import { useParams } from "next/navigation";
 import { axiosClient } from "@/utils/axios/axios-client";
+import { TbLayoutSidebarLeftExpand } from "react-icons/tb";
 
 export default function AuthorizedLayout({
   children,
@@ -14,6 +15,15 @@ export default function AuthorizedLayout({
 }>) {
   const params = useParams();
   const [friends, setFriends] = useState<Friend[]>([]);
+  const [isAsideOpen, setIsAsideOpen] = useState<boolean>(false);
+
+  function openAside() {
+    setIsAsideOpen(true);
+  }
+
+  function closeAside() {
+    setIsAsideOpen(false);
+  }
 
   const getFriends = async () => {
     try {
@@ -33,12 +43,19 @@ export default function AuthorizedLayout({
 
   return (
     <div className={styles.container}>
-      <div className={styles.aside}>
-        <AuthorizedAside
-          friends={friends}
-          selectedFriendId={selectedFriendId}
-        />
-      </div>
+      {isAsideOpen ? (
+        <div className={styles.aside}>
+          <AuthorizedAside
+            friends={friends}
+            selectedFriendId={selectedFriendId}
+            closeAside={closeAside}
+          />
+        </div>
+      ) : (
+        <div className={styles.closeAside} onClick={openAside}>
+          <TbLayoutSidebarLeftExpand size={20} />
+        </div>
+      )}
       <div className={styles.content}>{children}</div>
     </div>
   );
