@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.chatInput {
+.form {
   padding: 5px 20px;
   background-color: #2f2f2f;
   border-radius: 30px;
@@ -17,16 +17,16 @@
   display: flex;
 }
 
-.chatInput input {
+.form input {
   width: 100%;
   padding: 10px;
   border-radius: 4px;
 }
 
-.chatInput button {
+.form button {
   cursor: pointer;
 }
 
-.chatInput button:hover {
+.form button:hover {
   color: #ffffff80;
 }

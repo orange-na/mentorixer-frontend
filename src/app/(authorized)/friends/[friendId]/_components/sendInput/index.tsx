@@ -5,6 +5,9 @@ import styles from "./index.module.css";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { IoSend } from "react-icons/io5";
+import { getFormProps, useForm } from "@conform-to/react";
+import { parseWithZod } from "@conform-to/zod";
+import { seneContentSchema } from "../../_schema/schema";
 
 type ChatInputProps = {
   friendId: string;
@@ -14,9 +17,19 @@ export default function ChatInput(props: ChatInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
+  const [form, fields] = useForm({
+    onValidate({ formData }) {
+      return parseWithZod(formData, { schema: seneContentSchema });
+    },
+    shouldValidate: "onSubmit",
+    shouldRevalidate: "onInput",
+    onSubmit(event, { formData }) {
+      event.preventDefault();
+      handleSubmit(formData);
+    },
+  });
+
+  const handleSubmit = async (formData: FormData) => {
     try {
       const res = await axiosClient.post(
         `/friends/${props.friendId}/messages`,
@@ -38,16 +51,19 @@ export default function ChatInput(props: ChatInputProps) {
 
   return (
     <div className={styles.container}>
-      <form className={styles.chatInput} onSubmit={handleSubmit}>
+      <form {...getFormProps(form)} className={styles.form}>
         <input
           type="text"
-          name="content"
+          name={fields.content.name}
           placeholder="Type your message..."
           ref={inputRef}
         />
 
-        <button>
-          <IoSend size={20} />
+        <button type="submit" disabled={fields.content.dirty}>
+          <IoSend
+            size={20}
+            style={fields.content.dirty ? {} : { color: "#ffffff50" }}
+          />
         </button>
       </form>
     </div>
