@@ -1,6 +1,6 @@
 "use client";
 
-import UnAuthorizedHeader from "@/components/header";
+// import UnAuthorizedHeader from "@/components/header";
 import styles from "./layout.module.css";
 
 export default function PreLoginLayout({
@@ -10,7 +10,7 @@ export default function PreLoginLayout({
 }>) {
   return (
     <div className={styles.container}>
-      <UnAuthorizedHeader />
+      {/* <UnAuthorizedHeader /> */}
       {children}
     </div>
   );

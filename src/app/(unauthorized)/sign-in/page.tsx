@@ -4,12 +4,30 @@ import axios from "axios";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 import { setCookie } from "@/utils/cookie/cookie-client";
+import InputContainer from "@/components/inputContainer";
+import InputText from "@/components/inputText";
+import Button from "@/components/button";
+import Link from "next/link";
+import { signInSchema } from "./_schema/schema";
+import { getFormProps, useForm } from "@conform-to/react";
+import { parseWithZod } from "@conform-to/zod";
 
 export default function SignIn() {
   const router = useRouter();
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
+
+  const [form, fields] = useForm({
+    onValidate({ formData }) {
+      return parseWithZod(formData, { schema: signInSchema });
+    },
+    shouldValidate: "onSubmit",
+    shouldRevalidate: "onInput",
+    onSubmit(event, { formData }) {
+      event.preventDefault();
+      handleSubmit(formData);
+    },
+  });
+
+  const handleSubmit = async (formData: FormData) => {
     try {
       const res = await axios.post(
         "http://localhost:8080/sign-in",
@@ -25,33 +43,40 @@ export default function SignIn() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Sign In</h1>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <label htmlFor="email" className={styles.label}>
-          Email:
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          className={styles.input}
-          required
-        />
+      <h1 className={styles.title}>ログイン</h1>
+      <form {...getFormProps(form)} className={styles.form}>
+        <InputContainer
+          title="メールアドレス"
+          errorMessage={fields.email.errors?.[0]}
+        >
+          <InputText
+            name={fields.email.name}
+            type="email"
+            isError={!!fields.email.errors}
+            placeholder="example@example.com"
+          />
+        </InputContainer>
 
-        <label htmlFor="password" className={styles.label}>
-          Password:
-        </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          className={styles.input}
-          required
-        />
+        <InputContainer
+          title="パスワード"
+          errorMessage={fields.password.errors?.[0]}
+        >
+          <InputText
+            name={fields.password.name}
+            type="password"
+            isError={!!fields.password.errors}
+          />
+        </InputContainer>
 
-        <button type="submit" className={styles.button}>
-          Sign In
-        </button>
+        <Button variant="primary" type="submit" marginTop={20}>
+          ログイン
+        </Button>
+        <p className={styles.signUp}>
+          アカウントをお持ちでない方は
+          <Link href="/sign-up" className={styles.signUpLink}>
+            こちら
+          </Link>
+        </p>
       </form>
     </div>
   );
