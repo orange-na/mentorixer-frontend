@@ -13,10 +13,8 @@ export default function MessageContent({
   return (
     <>
       <div className={styles.header}>
-        <div>
-          名前：{friend.name} MBTI：{friend.mbti} 年齢：{friend.age}歳 特徴：
-          {friend.description}
-        </div>
+        名前：{friend.name} MBTI：{friend.mbti} 年齢：{friend.age}歳 特徴：
+        {friend.description}
       </div>
 
       <div className={styles.messageContent}>

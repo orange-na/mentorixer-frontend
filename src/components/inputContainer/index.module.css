@@ -1,0 +1,36 @@
+.container {
+  text-align: left;
+}
+
+.input_title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 100%;
+  margin-bottom: 16px;
+}
+
+.input_note {
+  text-align: left;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-left: 2px;
+  color: gray;
+}
+
+.error_message {
+  margin-top: 8px;
+  text-align: left;
+  color: #f53753;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  gap: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.error_message p {
+  margin: 0;
+}

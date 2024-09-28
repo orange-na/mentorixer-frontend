@@ -13,24 +13,24 @@
 .header {
   position: fixed;
   padding: 30px;
+  text-align: center;
   width: 100%;
-  background-color: #f0fff7;
-  margin: 20px;
+  background-color: var(--primary-color);
 }
 
 .message {
   max-width: 70%;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 16px;
 }
 
 .sent {
   align-self: flex-end;
-  background-color: #007bff;
-  color: white;
+  background-color: #2f2f2f;
 }
 
 .received {
   align-self: flex-start;
-  background-color: #f1f0f0;
+  background-color: #2f2f2f;
 }

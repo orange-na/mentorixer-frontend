@@ -4,6 +4,7 @@ import { axiosClient } from "@/utils/axios/axios-client";
 import styles from "./index.module.css";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+import { IoSend } from "react-icons/io5";
 
 type ChatInputProps = {
   friendId: string;
@@ -36,15 +37,19 @@ export default function ChatInput(props: ChatInputProps) {
   };
 
   return (
-    <form className={styles.chatInput} onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="content"
-        placeholder="Type your message..."
-        ref={inputRef}
-      />
+    <div className={styles.container}>
+      <form className={styles.chatInput} onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="content"
+          placeholder="Type your message..."
+          ref={inputRef}
+        />
 
-      <button>Send</button>
-    </form>
+        <button>
+          <IoSend size={20} />
+        </button>
+      </form>
+    </div>
   );
 }
