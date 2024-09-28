@@ -10,6 +10,7 @@ import { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { axiosClient } from "@/utils/axios/axios-client";
+import { useRouter } from "next/navigation";
 
 export type AuthorizedAsideProps = {
   friends: Friend[];
@@ -18,6 +19,7 @@ export type AuthorizedAsideProps = {
 };
 
 export default function AuthorizedAside(props: AuthorizedAsideProps) {
+  const router = useRouter();
   const [friendMenuId, setFriendMenuId] = useState<number | null>(null);
 
   async function handleDeleteFriend(friendId: number) {
@@ -44,13 +46,14 @@ export default function AuthorizedAside(props: AuthorizedAsideProps) {
         {props.friends.map((friend) => (
           <li
             key={friend.id}
+            onClick={() => router.push(`/friends/${friend.id}`)}
             className={
               props.selectedFriendId === friend.id.toString()
                 ? styles.selected
                 : ""
             }
           >
-            <Link href={`/friends/${friend.id}`}>{friend.name}</Link>
+            <p>{friend.name}</p>
             <BsThreeDots
               className={styles.menuButton}
               onClick={() => setFriendMenuId(friend.id)}

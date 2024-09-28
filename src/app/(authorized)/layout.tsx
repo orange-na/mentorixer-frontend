@@ -15,7 +15,7 @@ export default function AuthorizedLayout({
 }>) {
   const params = useParams();
   const [friends, setFriends] = useState<Friend[]>([]);
-  const [isAsideOpen, setIsAsideOpen] = useState<boolean>(false);
+  const [isAsideOpen, setIsAsideOpen] = useState<boolean>(true);
 
   function openAside() {
     setIsAsideOpen(true);
