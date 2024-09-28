@@ -8,6 +8,9 @@ import { createFriendSchema } from "../../_schema/schema";
 import InputText from "@/components/inputText";
 import InputContainer from "@/components/inputContainer";
 import Button from "@/components/button";
+import InputTextarea from "@/components/inputTextarea";
+import InputSelect from "@/components/inputSelect";
+import { MBTI } from "@/utils/constant";
 
 export default function CreateFriendForm() {
   const [form, fields] = useForm({
@@ -43,11 +46,12 @@ export default function CreateFriendForm() {
       </InputContainer>
 
       <InputContainer title="MBTI" errorMessage={fields.mbti.errors?.[0]}>
-        <InputText
+        <InputSelect
           name={fields.mbti.name}
-          type="text"
+          options={MBTI.map((value) => ({ value, label: value }))}
+          selectedValue={fields.mbti.value}
+          placeholder="選択"
           isError={!!fields.mbti.errors}
-          placeholder="Ex. INFP"
         />
       </InputContainer>
 
@@ -55,15 +59,22 @@ export default function CreateFriendForm() {
         <InputText
           name={fields.age.name}
           type="number"
+          placeholder="Ex. 20"
           isError={!!fields.age.errors}
         />
       </InputContainer>
 
       <InputContainer title="性別" errorMessage={fields.gender.errors?.[0]}>
-        <InputText
+        <InputSelect
           name={fields.gender.name}
-          type="text"
-          isError={!!fields.age.errors}
+          options={[
+            { value: "0", label: "男性" },
+            { value: "1", label: "女性" },
+            { value: "2", label: "その他" },
+          ]}
+          selectedValue={fields.gender.value}
+          placeholder="選択"
+          isError={!!fields.gender.errors}
         />
       </InputContainer>
 
@@ -71,10 +82,10 @@ export default function CreateFriendForm() {
         title="説明"
         errorMessage={fields.description.errors?.[0]}
       >
-        <InputText
+        <InputTextarea
           name={fields.description.name}
-          type="text"
           isError={!!fields.age.errors}
+          height={100}
         />
       </InputContainer>
 
