@@ -6,7 +6,7 @@
   height: 100%;
 }
 
-.profile {
+.top {
   display: flex;
   align-items: center;
   display: flex;
@@ -30,6 +30,7 @@
   padding: 10px;
   margin: 5px 0;
   cursor: pointer;
+  position: relative;
 }
 
 .friendList li.selected {
@@ -40,6 +41,9 @@
 .friendList li:hover {
   background-color: var(--tertiary-color);
   border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .icon {
@@ -53,6 +57,44 @@
   transition: background-color 0.2s;
 }
 
-.icon:hover {
+.menuButton {
+  display: none;
+}
+
+.friendList li:hover .menuButton {
+  display: block;
+}
+
+.friendMenu {
+  position: absolute;
+  top: 40px;
+  right: -140px;
+  width: 150px;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--tertiary-color);
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 10;
+}
+
+.friendMenuItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.friendMenuDelete {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  cursor: pointer;
+  color: #eb4747;
+}
+
+.friendMenu div:hover {
   background-color: var(--tertiary-color);
+  border-radius: 8px;
 }

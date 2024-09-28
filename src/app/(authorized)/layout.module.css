@@ -8,6 +8,7 @@
 
 .aside {
   flex: 2;
+  min-width: 250px;
 }
 
 .content {
