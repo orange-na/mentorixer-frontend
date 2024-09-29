@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 export type AuthorizedAsideProps = {
   friends: Friend[];
   selectedFriendId?: string;
+  setFriends: (friends: Friend[]) => void;
   closeAside: () => void;
 };
 
@@ -25,7 +26,10 @@ export default function AuthorizedAside(props: AuthorizedAsideProps) {
   async function handleDeleteFriend(friendId: number) {
     try {
       await axiosClient.delete(`/friends/${friendId}`);
-      window.location.reload();
+      props.setFriends(
+        props.friends.filter((friend) => friend.id !== friendId)
+      );
+      router.push("/friends");
     } catch (error) {
       console.error(error);
     }

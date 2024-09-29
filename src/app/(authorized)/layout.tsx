@@ -49,6 +49,7 @@ export default function AuthorizedLayout({
             friends={friends}
             selectedFriendId={selectedFriendId}
             closeAside={closeAside}
+            setFriends={setFriends}
           />
         </div>
       ) : (
