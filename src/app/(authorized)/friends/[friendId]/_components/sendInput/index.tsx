@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { IoSend } from "react-icons/io5";
 import { getFormProps, useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
-import { seneContentSchema } from "../../_schema/schema";
+import { sendContentSchema } from "../../_schema/schema";
 
 type ChatInputProps = {
   friendId: string;
@@ -19,7 +19,7 @@ export default function ChatInput(props: ChatInputProps) {
 
   const [form, fields] = useForm({
     onValidate({ formData }) {
-      return parseWithZod(formData, { schema: seneContentSchema });
+      return parseWithZod(formData, { schema: sendContentSchema });
     },
     shouldValidate: "onSubmit",
     shouldRevalidate: "onInput",
@@ -59,7 +59,7 @@ export default function ChatInput(props: ChatInputProps) {
           ref={inputRef}
         />
 
-        <button type="submit" disabled={fields.content.dirty}>
+        <button disabled={!fields.content.dirty}>
           <IoSend
             size={20}
             style={fields.content.dirty ? {} : { color: "#ffffff50" }}
