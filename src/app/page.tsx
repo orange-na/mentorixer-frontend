@@ -8,6 +8,7 @@ export default function Home() {
         <LinkButton href="/sign-up" variant="primary">
           新規登録
         </LinkButton>
+
         <LinkButton href="/sign-in" variant="primary">
           ログイン
         </LinkButton>
