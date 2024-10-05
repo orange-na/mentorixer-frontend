@@ -11,8 +11,10 @@ import Button from "@/components/button";
 import InputTextarea from "@/components/inputTextarea";
 import InputSelect from "@/components/inputSelect";
 import { MBTI } from "@/utils/constant";
+import { useRouter } from "next/navigation";
 
 export default function CreateFriendForm() {
+  const router = useRouter();
   const [form, fields] = useForm({
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: createFriendSchema });
@@ -27,8 +29,11 @@ export default function CreateFriendForm() {
 
   const handleSubmit = async (formData: FormData) => {
     try {
-      await axiosClient.post("/friends", Object.fromEntries(formData));
-      window.location.reload();
+      const res = await axiosClient.post(
+        "/friends",
+        Object.fromEntries(formData)
+      );
+      router.push(`/friends/${res.data.id}`);
     } catch (error) {
       console.error(error);
     }
